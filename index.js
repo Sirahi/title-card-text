@@ -335,7 +335,6 @@ export default () => {
     });
 
     useCleanup(()=>{
-        console.log("CLEANUP");
         for (const obj of objs) {
             if (obj) {
                 scene.remove(obj);
