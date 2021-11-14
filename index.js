@@ -265,7 +265,7 @@ export default () => {
         {
             heading = new Text();
             heading.text = "HEADING";
-            heading.font = '../../public/fonts/Plaza Regular.ttf';
+            heading.font = './public/fonts/Plaza Regular.ttf';
             heading.fontSize = 130;
             heading.anchorX = 'middle';
             heading.anchorY = 'middle';
