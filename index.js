@@ -338,7 +338,7 @@ export default () => {
         for (const obj of objs) {
             if (obj) {
                 scene.remove(obj);
-                subApp.destroy();
+                obj.destroy();
             }
         }
     });
