@@ -246,7 +246,7 @@ export default () => {
         {   
             title = new Text();
             title.text = "WEBAVERSE";
-            title.font = '../../public/fonts/Plaza Regular.ttf';
+            title.font = './public/fonts/Plaza Regular.ttf';
             title.fontSize = 50;
             title.anchorX = 'middle';
             title.anchorY = 'middle';
@@ -284,7 +284,7 @@ export default () => {
         {
             subHeading = new Text();
             subHeading.text = "SUBHEADING";
-            subHeading.font = '../../public/fonts/Plaza Regular.ttf';
+            subHeading.font = './public/fonts/Plaza Regular.ttf';
             subHeading.fontSize = 70;
             subHeading.anchorX = 'middle';
             subHeading.anchorY = 'middle';
@@ -303,7 +303,7 @@ export default () => {
         {
             text = new Text();
             text.text = "TEXT";
-            text.font = '../../public/fonts/Plaza Regular.ttf';
+            text.font = './public/fonts/Plaza Regular.ttf';
             text.fontSize = 80;
             text.anchorX = 'middle';
             text.anchorY = 'middle';
