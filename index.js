@@ -338,6 +338,7 @@ export default () => {
         for (const obj of objs) {
             if (obj) {
                 scene.remove(obj);
+                console.log("OBJECT", obj);
                 obj.destroy();
             }
         }
