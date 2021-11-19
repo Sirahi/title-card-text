@@ -322,12 +322,11 @@ export default () => {
         
         let now = 0;
         _update = timeDiff => {
-            console.log("TEXT TIME: ", timeDiff);
+            now += timeDiff;
             materialTitle.uniforms.time.value = now/1000;
             materialH.uniforms.time.value = now/1000;
             materialSh.uniforms.time.value = now/1000;
             materialText.uniforms.time.value = now/1000;
-            now += timeDiff;
         };
     }
 
