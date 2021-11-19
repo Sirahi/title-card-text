@@ -321,8 +321,8 @@ export default () => {
 
         
         let now = 0;
-        _update = (timeDiff) => {
-            console.log("TEXT TIME: ", timeStamp);
+        _update = timeDiff => {
+            console.log("TEXT TIME: ", timeDiff);
             materialTitle.uniforms.time.value = now/1000;
             materialH.uniforms.time.value = now/1000;
             materialSh.uniforms.time.value = now/1000;
