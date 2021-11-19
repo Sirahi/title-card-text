@@ -278,7 +278,7 @@ export default () => {
             objs[1] = heading;
             
             heading.sync();
-//             scene.add(heading);
+            scene.add(heading);
         }
 
         {
@@ -316,7 +316,7 @@ export default () => {
             objs[3] = text;           
             
             text.sync();
-//             scene.add(text);
+            scene.add(text);
         }
 
         
