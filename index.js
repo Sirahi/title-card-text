@@ -321,8 +321,8 @@ export default () => {
 
         
         let now = 0;
-        _update = (timeStamp, timeDiff) => {
-            console.log("TEXT TIME: ", timeDiff, timeStamp);
+        _update = (timeDiff) => {
+            console.log("TEXT TIME: ", timeStamp);
             materialTitle.uniforms.time.value = now/1000;
             materialH.uniforms.time.value = now/1000;
             materialSh.uniforms.time.value = now/1000;
@@ -331,8 +331,8 @@ export default () => {
         };
     }
 
-    useFrame(({timeStamp, timeDiff}) => {
-        _update && _update(timeStamp, timeDiff);
+    useFrame(({timeDiff}) => {
+        _update && _update(timeDiff);
     });
 
     useCleanup(()=>{
