@@ -32,17 +32,15 @@ const materialTitle = new THREE.ShaderMaterial({
         uniform float time;
         
         float offsetX = -690.0;
-        float offsetY = 1640.0;
-
-        const float factor = 2.0;
+        float offsetY = 1150.0;
         
         const float timeFactor = 5.0;
-        const float animTime = 6.0 * factor;
+        const float animTime = 6.0;
         
         void main()
         {
             float f = mod(time * timeFactor, animTime);
-            f = min(0.99 * factor, f);
+            f = min(1.5, f);
             f *= 1000.0;
             gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX, position.y + offsetY - f, -1.0, 1.0);
         }
@@ -52,9 +50,11 @@ const materialTitle = new THREE.ShaderMaterial({
         uniform vec3 color;
         void main()
         {
-            gl_FragColor = vec4(color / (2. + color), 1.);
+            gl_FragColor = vec4(color, 1.);
         }
-    `
+    `,
+    polygonOffset: true,
+    polygonOffsetFactor: -3.0,
 });
 
 const materialH = new THREE.ShaderMaterial({
@@ -87,10 +87,8 @@ const materialH = new THREE.ShaderMaterial({
         
         float offsetX = 1010.0;
         float offsetY = 330.0;
-
-        const float factor = 2.0;
         
-        const float timeFactor = 5.0 / factor;
+        const float timeFactor = 5.0;
         const float animTime = 6.0;
         
         void main()
@@ -110,9 +108,12 @@ const materialH = new THREE.ShaderMaterial({
         uniform vec3 color;
         void main()
         {
-            gl_FragColor = vec4(color / (2. + color), 1.);
+            gl_FragColor = vec4(color, 1.);
         }
     `
+    ,
+    polygonOffset: true,
+    polygonOffsetFactor: -3.0,
 });
 
 const materialSh = new THREE.ShaderMaterial({
@@ -143,12 +144,10 @@ const materialSh = new THREE.ShaderMaterial({
         uniform mat4 lViewMatrix;
         uniform float time;
         
-        float offsetX = 1090.0;
+        float offsetX = 1010.0;
         float offsetY = 140.0;
-
-        const float factor = 2.0;
         
-        const float timeFactor = 5.0 / factor;
+        const float timeFactor = 5.0;
         const float animTime = 6.0;
         
         void main()
@@ -167,9 +166,12 @@ const materialSh = new THREE.ShaderMaterial({
         uniform vec3 color;
         void main()
         {
-            gl_FragColor = vec4(color / (2. + color), 1.);
+            gl_FragColor = vec4(color, 1.);
         }
     `
+    ,
+    polygonOffset: true,
+    polygonOffsetFactor: -3.0,
 });
 
 const materialText = new THREE.ShaderMaterial({
@@ -200,12 +202,10 @@ const materialText = new THREE.ShaderMaterial({
         uniform mat4 lViewMatrix;
         uniform float time;
         
-        float offsetX = 1240.0;
+        float offsetX = 1010.0;
         float offsetY = 0.0;
-
-        const float factor = 2.0;
         
-        const float timeFactor = 5.0 / factor;
+        const float timeFactor = 5.0;
         const float animTime = 6.0;
         
         void main()
@@ -224,12 +224,16 @@ const materialText = new THREE.ShaderMaterial({
         uniform vec3 color;
         void main()
         {
-            gl_FragColor = vec4(color / (2. + color), 1.);
+            gl_FragColor = vec4(color, 1.);
         }
-    `
+    `,
+    polygonOffset: true,
+    polygonOffsetFactor: -3.0,
 });
 
 const orthographicCamera = new THREE.OrthographicCamera(-1000, 1000, 1000, -1000, 0.1, 1000);
+orthographicCamera.position.set(0, 0, 1);
+orthographicCamera.lookAt(new THREE.Vector3(0, 0, 0));
 let _update = null;
 
 let title = null;
@@ -246,7 +250,7 @@ export default () => {
         {   
             title = new Text();
             title.text = "WEBAVERSE";
-            title.font = './public/fonts/Plaza Regular.ttf';
+            title.font = './fonts/Plaza Regular.ttf';
             title.fontSize = 50;
             title.anchorX = 'middle';
             title.anchorY = 'middle';
@@ -259,13 +263,13 @@ export default () => {
             objs[0] = title;
                         
             title.sync();
-//             scene.add(title);
+            scene.add(title);
         }
 
         {
             heading = new Text();
             heading.text = "HEADING";
-            heading.font = './public/fonts/Plaza Regular.ttf';
+            heading.font = './fonts/Plaza Regular.ttf';
             heading.fontSize = 130;
             heading.anchorX = 'middle';
             heading.anchorY = 'middle';
@@ -284,7 +288,7 @@ export default () => {
         {
             subHeading = new Text();
             subHeading.text = "SUBHEADING";
-            subHeading.font = './public/fonts/Plaza Regular.ttf';
+            subHeading.font = './fonts/Plaza Regular.ttf';
             subHeading.fontSize = 70;
             subHeading.anchorX = 'middle';
             subHeading.anchorY = 'middle';
@@ -303,7 +307,7 @@ export default () => {
         {
             text = new Text();
             text.text = "TEXT";
-            text.font = './public/fonts/Plaza Regular.ttf';
+            text.font = './fonts/Plaza Regular.ttf';
             text.fontSize = 80;
             text.anchorX = 'middle';
             text.anchorY = 'middle';
@@ -322,7 +326,6 @@ export default () => {
         
         let now = 0;
         _update = timeDiff => {
-            console.log("TEXT: ", now);
             materialTitle.uniforms.time.value = now/1000;
             materialH.uniforms.time.value = now/1000;
             materialSh.uniforms.time.value = now/1000;
