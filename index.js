@@ -27,6 +27,9 @@ const materialTitle = new THREE.ShaderMaterial({
     },
     
     vertexShader: `\
+        precision highp float;
+        precision highp int;
+
         uniform mat4 lProjectionMatrix;
         uniform mat4 lViewMatrix;
         uniform float time;
@@ -34,7 +37,7 @@ const materialTitle = new THREE.ShaderMaterial({
         float offsetX = -690.0;
         float offsetY = 1150.0;
         
-        const float timeFactor = 5.0;
+        const float timeFactor = 4.0;
         const float animTime = 6.0;
         
         void main()
@@ -47,14 +50,15 @@ const materialTitle = new THREE.ShaderMaterial({
     `
     ,
     fragmentShader: `\
+        precision highp float;
+        precision highp int;
+
         uniform vec3 color;
         void main()
         {
             gl_FragColor = vec4(color, 1.);
         }
-    `,
-    polygonOffset: true,
-    polygonOffsetFactor: -3.0,
+    `
 });
 
 const materialH = new THREE.ShaderMaterial({
@@ -81,6 +85,9 @@ const materialH = new THREE.ShaderMaterial({
     },
     
     vertexShader: `\
+        precision highp float;
+        precision highp int;
+
         uniform mat4 lProjectionMatrix;
         uniform mat4 lViewMatrix;
         uniform float time;
@@ -88,7 +95,7 @@ const materialH = new THREE.ShaderMaterial({
         float offsetX = 1010.0;
         float offsetY = 330.0;
         
-        const float timeFactor = 5.0;
+        const float timeFactor = 4.0;
         const float animTime = 6.0;
         
         void main()
@@ -111,9 +118,6 @@ const materialH = new THREE.ShaderMaterial({
             gl_FragColor = vec4(color, 1.);
         }
     `
-    ,
-    polygonOffset: true,
-    polygonOffsetFactor: -3.0,
 });
 
 const materialSh = new THREE.ShaderMaterial({
@@ -140,6 +144,9 @@ const materialSh = new THREE.ShaderMaterial({
     },
     
     vertexShader: `\
+        precision highp float;
+        precision highp int;
+
         uniform mat4 lProjectionMatrix;
         uniform mat4 lViewMatrix;
         uniform float time;
@@ -147,7 +154,7 @@ const materialSh = new THREE.ShaderMaterial({
         float offsetX = 1010.0;
         float offsetY = 140.0;
         
-        const float timeFactor = 5.0;
+        const float timeFactor = 4.0;
         const float animTime = 6.0;
         
         void main()
@@ -163,6 +170,8 @@ const materialSh = new THREE.ShaderMaterial({
     `
     ,
     fragmentShader: `\
+        precision highp float;
+        precision highp int;
         uniform vec3 color;
         void main()
         {
@@ -170,8 +179,6 @@ const materialSh = new THREE.ShaderMaterial({
         }
     `
     ,
-    polygonOffset: true,
-    polygonOffsetFactor: -3.0,
 });
 
 const materialText = new THREE.ShaderMaterial({
@@ -198,6 +205,9 @@ const materialText = new THREE.ShaderMaterial({
     },
     
     vertexShader: `\
+        precision highp float;
+        precision highp int;
+        
         uniform mat4 lProjectionMatrix;
         uniform mat4 lViewMatrix;
         uniform float time;
@@ -205,7 +215,7 @@ const materialText = new THREE.ShaderMaterial({
         float offsetX = 1010.0;
         float offsetY = 0.0;
         
-        const float timeFactor = 5.0;
+        const float timeFactor = 4.0;
         const float animTime = 6.0;
         
         void main()
@@ -226,9 +236,7 @@ const materialText = new THREE.ShaderMaterial({
         {
             gl_FragColor = vec4(color, 1.);
         }
-    `,
-    polygonOffset: true,
-    polygonOffsetFactor: -3.0,
+    `
 });
 
 const orthographicCamera = new THREE.OrthographicCamera(-1000, 1000, 1000, -1000, 0.1, 1000);
@@ -268,10 +276,10 @@ export default () => {
 
         {
             heading = new Text();
-            heading.text = "HEADING";
+            heading.text = app.getComponent("heading") ? app.getComponent("heading") : "HEADING";
             heading.font = './fonts/Plaza Regular.ttf';
             heading.fontSize = 130;
-            heading.anchorX = 'middle';
+            heading.anchorX = 'left';
             heading.anchorY = 'middle';
             heading.material = materialH;
             
@@ -287,10 +295,10 @@ export default () => {
 
         {
             subHeading = new Text();
-            subHeading.text = "SUBHEADING";
+            subHeading.text = app.getComponent("subHeading") ? app.getComponent("subHeading") : "SUBHEADING";
             subHeading.font = './fonts/Plaza Regular.ttf';
             subHeading.fontSize = 70;
-            subHeading.anchorX = 'middle';
+            subHeading.anchorX = 'left';
             subHeading.anchorY = 'middle';
             subHeading.material = materialSh;
             
@@ -306,10 +314,10 @@ export default () => {
 
         {
             text = new Text();
-            text.text = "TEXT";
+            text.text = app.getComponent("text") ? app.getComponent("text") : "TEXT";
             text.font = './fonts/Plaza Regular.ttf';
             text.fontSize = 80;
-            text.anchorX = 'middle';
+            text.anchorX = 'left';
             text.anchorY = 'middle';
             text.material = materialText;
             
@@ -325,12 +333,12 @@ export default () => {
 
         
         let now = 0;
-        _update = timeDiff => {
+        _update = timeDiff => {            
             materialTitle.uniforms.time.value = now/1000;
             materialH.uniforms.time.value = now/1000;
             materialSh.uniforms.time.value = now/1000;
             materialText.uniforms.time.value = now/1000;
-            
+
             now += timeDiff;
         };
     }
