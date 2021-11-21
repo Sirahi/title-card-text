@@ -35,7 +35,7 @@ const materialTitle = new THREE.ShaderMaterial({
         uniform float time;
         
         float offsetX = -690.0;
-        float offsetY = 1150.0;
+        float offsetY = 2650.0;
         
         const float timeFactor = 4.0;
         const float animTime = 6.0;
@@ -43,8 +43,8 @@ const materialTitle = new THREE.ShaderMaterial({
         void main()
         {
             float f = mod(time * timeFactor, animTime);
-            f = min(1.5, f);
-            f *= 1000.0;
+            f = min(1.49, f);
+            f *= 2000.0;
             gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX, position.y + offsetY - f, -1.0, 1.0);
         }
     `
@@ -105,7 +105,7 @@ const materialH = new THREE.ShaderMaterial({
             {
                 f = min(1.99, f);
                 f *= 1000.0;
-                gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX + (0.99 * 1000.0)- f, position.y + offsetY, -1.0, 1.0);
+                gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX + (0.99 * 1000.0) - f, position.y + offsetY, -1.0, 1.0);
             }
 
         }
@@ -164,7 +164,7 @@ const materialSh = new THREE.ShaderMaterial({
             {
                 f = min(2.99, f);
                 f *= 1000.0;
-                gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX + (1.99 * 1000.0)- f, position.y + offsetY, -1.0, 1.0);
+                gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX + (1.99 * 1000.0) - f, position.y + offsetY, -1.0, 1.0);
             }
         }
     `
@@ -225,7 +225,7 @@ const materialText = new THREE.ShaderMaterial({
             {
                 f = min(3.99, f);
                 f *= 1000.0;
-                gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX + (2.99 * 1000.0)- f, position.y + offsetY, -1.0, 1.0);
+                gl_Position = lProjectionMatrix * lViewMatrix * vec4(position.x + offsetX + (2.99 * 1000.0) - f, position.y + offsetY, -1.0, 1.0);
             }
         }
     `
@@ -340,11 +340,6 @@ export default () => {
             materialText.uniforms.time.value = now/1000;
 
             now += timeDiff;
-            console.log("\\n");
-            console.log("TEXT Per", performance.now());
-            console.log("TEXT now", now);
-            console.log("TEXT timeDiff", timeDiff);
-            console.log("\\n");
         };
     }
 
