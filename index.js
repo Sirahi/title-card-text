@@ -340,6 +340,11 @@ export default () => {
             materialText.uniforms.time.value = now/1000;
 
             now += timeDiff;
+            console.log("\\n");
+            console.log("TEXT Per", performance.now());
+            console.log("TEXT now", now);
+            console.log("TEXT timeDiff", timeDiff);
+            console.log("\\n");
         };
     }
 
