@@ -240,8 +240,8 @@ const materialText = new THREE.ShaderMaterial({
 });
 
 const orthographicCamera = new THREE.OrthographicCamera(-1000, 1000, 1000, -1000, 0.1, 1000);
-orthographicCamera.position.set(0, 0, 1);
-orthographicCamera.lookAt(new THREE.Vector3(0, 0, 0));
+// orthographicCamera.position.set(0, 0, 1);
+// orthographicCamera.lookAt(new THREE.Vector3(0, 0, 0));
 let _update = null;
 
 let title = null;
