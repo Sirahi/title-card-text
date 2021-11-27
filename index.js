@@ -254,7 +254,7 @@ let objs = [null, null, null, null];
 export default () => {
     const app = useApp();
     const postScene = usePostScene();
-    console.log("LATEST TITLE CARD TEXT");
+
     {
         {   
             title = new Text();
