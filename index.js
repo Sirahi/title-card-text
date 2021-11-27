@@ -254,6 +254,7 @@ let objs = [null, null, null, null];
 export default () => {
     const app = useApp();
     const postScene = usePostScene();
+
     {
         {   
             title = new Text();
@@ -333,18 +334,18 @@ export default () => {
 
         
         let now = 0;
-        _update = timeDiff => {            
-            materialTitle.uniforms.time.value = now/1000;
-            materialH.uniforms.time.value = now/1000;
-            materialSh.uniforms.time.value = now/1000;
-            materialText.uniforms.time.value = now/1000;
+        _update = (timestamp, timeDiff) => {
+            materialTitle.uniforms.time.value = timestamp/1000;
+            materialH.uniforms.time.value = timestamp/1000;
+            materialSh.uniforms.time.value = timestamp/1000;
+            materialText.uniforms.time.value = timestamp/1000;
 
             now += timeDiff;
         };
     }
 
-    useFrame(({timeDiff}) => {
-        _update && _update(timeDiff);
+    useFrame(({timestamp, timeDiff}) => {
+        _update && _update(timestamp, timeDiff);
     });
 
     useCleanup(()=>{
