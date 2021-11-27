@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {Text} from 'troika-three-text'
 import metaversefile from 'metaversefile';
-const {useApp, useInternals, useFrame, useCleanup} = metaversefile;
+const {useApp, usePostScene, useFrame, useCleanup} = metaversefile;
 
 const materialTitle = new THREE.ShaderMaterial({
     uniforms:{
@@ -253,7 +253,7 @@ let objs = [null, null, null, null];
 
 export default () => {
     const app = useApp();
-    const {scene} = useInternals();
+    const postScene = usePostScene();
     {
         {   
             title = new Text();
@@ -271,7 +271,7 @@ export default () => {
             objs[0] = title;
                         
             title.sync();
-            scene.add(title);
+            postScene.add(title);
         }
 
         {
@@ -290,7 +290,7 @@ export default () => {
             objs[1] = heading;
             
             heading.sync();
-            scene.add(heading);
+            postScene.add(heading);
         }
 
         {
@@ -309,7 +309,7 @@ export default () => {
             objs[2] = subHeading;           
             
             subHeading.sync();
-            scene.add(subHeading);
+            postScene.add(subHeading);
         }
 
         {
@@ -328,7 +328,7 @@ export default () => {
             objs[3] = text;           
             
             text.sync();
-            scene.add(text);
+            postScene.add(text);
         }
 
         
@@ -350,7 +350,7 @@ export default () => {
     useCleanup(()=>{
         for (const obj of objs) {
             if (obj) {
-                scene.remove(obj);
+                postScene.remove(obj);
                 obj.dispose();
             }
         }
